@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>QRCode</title>
+    <!-- <script src="//cdn.bootcdn.net/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//cdn.bootcdn.net/ajax/libs/echarts/4.7.0/echarts.min.js"></script> -->
+    <script src="./vendors/jquery.min.js"></script>
+    <script src="./vendors/axios.min.js"></script>
+    <script src="./vendors/qrcode.min.js"></script>
+  </head>
+  <style lang="css">
+    .__did_body {
+      padding: 0;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      color: #313655;
+    }
+
+    .did-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .didqrcode-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .didqrcode-oper-wrap {
+      display: flex;
+      justify-content: center;
+      justify-items: center;
+      flex: 0 0 50px;
+      padding: 20px 20px;
+    }
+
+    .didqrcode-oper-wrap .did-refresh-btn {
+      color: #0c123d;
+      cursor: pointer;
+      font-weight: 300;
+      font-size: 1.05rem;
+      /* margin: 6px 10px; */
+    }
+
+    .did-timer-wrap .timer-text {
+      color: #0c123d;
+      font-weight: 300;
+      font-size: 12px;
+      padding: 12px 12px;
+      padding-bottom: 6px;
+      border: 0px;
+      box-shadow: none;
+    }
+
+    .did-timer-wrap .did-refresh-btn:hover,
+    .did-timer-wrap .did-refresh-btn:focus {
+      background-color: rgb(199, 196, 196);
+    }
+
+    .did-mask-wrap {
+      position: fixed;
+      display: flex;
+      float: left;
+      top: 0;
+      width: 100%;
+      height: calc(100% - 65px);
+      color: #0c123d;
+      font-size: 1.25rem;
+      font-weight: 500;
+      justify-content: center;
+      align-items: center;
+      background: rgba(246, 246, 246, 0.9);
+    }
+
+    .did-mask-wrap.mask-hide {
+      position: fixed;
+      display: none;
+      float: left;
+      top: 0;
+      width: 0;
+      height: 0;
+      color: #0c123d;
+      font-size: 1.25rem;
+      font-weight: 500;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+    }
+  </style>
+  <body class="__did_body">
+    <div class="did-wrap">
+      <div class="did-timer-wrap">
+        <div class="timer-text">
+          剩余 <span id="DidLeftTimes"></span> 秒失效
+        </div>
+      </div>
+      <div id="__DidQrcodeContainer" class="didqrcode-wrap"></div>
+      <div id="DidQrMask" class="did-mask-wrap">
+        <div class="mask-tips">二维码已失效</div>
+      </div>
+    </div>
+    <div class="didqrcode-oper-wrap">
+      <button id="DidRefreshBtn" class="did-refresh-btn">刷新二维码</button>
+    </div>
+    <script src="./vendors/easyxdm/easyXDM.debug.js"></script>
+    <script src="./js/qrcode-core.js"></script>
+  </body>
+</html>

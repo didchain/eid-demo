@@ -1,0 +1,19 @@
+{
+  "name": "leech-ifr",
+  "version": "0.0.1",
+  "description": "Demo",
+  "main": "index.js",
+  "scripts": {
+    "dev": "lite-server -c ci/bs-config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^0.21.1",
+    "http-proxy-middleware": "^1.1.0",
+    "jquery": "3.5.1",
+    "lite-server": "^2.6.1",
+    "qrcode": "^1.4.4"
+  }
+}
