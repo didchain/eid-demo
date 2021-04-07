@@ -13,9 +13,9 @@ module.exports = {
   files: ["./publish/**/*.{html,css,js}"],
   server: {
     baseDir: dist,
-    middleware: {
-      10: apiProxy,
-    },
+    // middleware: {
+    //   10: apiProxy,
+    // },
   },
   open: "./signin.html",
 };
