@@ -1,6 +1,6 @@
 {
   "name": "leech-ifr",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Demo",
   "main": "index.js",
   "scripts": {

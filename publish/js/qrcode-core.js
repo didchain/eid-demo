@@ -61,7 +61,7 @@
   let QRTimer = null;
   let CheckTimer = null;
 
-  const MaxPeriod = 60;
+  const MaxPeriod = 300;
   const CheckPeriod = 2500;
   const Modal = function (opts = {}) {
     /** api/check data  */
@@ -144,6 +144,13 @@
     createQrcodeHandler("Click Refresh");
   });
 
+  $("#DidQrMask").on("click", function (e) {
+    createQrcodeHandler("Click Mask Refresh");
+  });
+
+  $("#DidMaskTipBtn").on("click", function (e) {
+    createQrcodeHandler("Click Mask Refresh");
+  });
   /* ----------------------- function ------------------------------- */
   function createQrcodeHandler(tag) {
     console.log("QRcode create tag:", tag);
@@ -274,7 +281,7 @@
   function showQRMask(hide) {
     console.log("<<<.>>", hide);
     !hide
-      ? $("#DidQrMask").addClass("mask-hide")
-      : $("#DidQrMask").removeClass("mask-hide");
+      ? $("#DidQrMask").addClass("mask-hide").removeClass("did-hover")
+      : $("#DidQrMask").removeClass("mask-hide").addClass("did-hover");
   }
 })({});

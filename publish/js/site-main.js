@@ -1,5 +1,11 @@
 var recivedMsgHandle = function (message) {
-  $("#recMsg").text(message);
+  $(".rec-msg-wrap").removeClass("rec-hide");
+  try {
+    const json = JSON.parse(message);
+    $("#recMsg").text(JSON.stringify(json, null, 2));
+  } catch (error) {
+    $("#recMsg").text(message);
+  }
 };
 
 var iframeUrl = "http://eid.baschain.cn/qrcode.html"; // "http://eid.baschain.cn/qrcode.html";
