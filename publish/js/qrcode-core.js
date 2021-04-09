@@ -2,6 +2,9 @@
   if (!$) throw new Error("no found jquery.");
   if (!QRCode) throw new Error("unfound QRCode lib.");
 
+  const EidFetchHostMsg = {
+    erpcMethod: "fetchHostname",
+  };
   window.rpc = new easyXDM.Rpc(
     {
       isHost: false,
@@ -11,6 +14,7 @@
     {
       remote: {
         echo: {},
+        eidHandProtocol: {},
       },
     }
   );
@@ -151,37 +155,76 @@
   $("#DidMaskTipBtn").on("click", function (e) {
     createQrcodeHandler("Click Mask Refresh");
   });
+
+  // $("#testBtn").on("click", function (e) {
+  //   const msg = {
+  //     erpcMethod: "fetchHostname",
+  //   };
+  //   rpc.didHandProtocol(
+  //     JSON.stringify(msg),
+  //     function (erpcResponse) {
+  //       console.log("testBtn>>>>>", erpcResponse);
+  //     },
+  //     function (erpcError) {
+  //       console.log("Fetch hostname fail.", erpcError);
+  //     }
+  //   );
+  // });
   /* ----------------------- function ------------------------------- */
   function createQrcodeHandler(tag) {
     console.log("QRcode create tag:", tag);
-    $http
-      .get("auth")
-      .then((resp) => {
-        console.log(">>>>>>>>axios>>>>>>>>>>>>", resp);
-        if (resp.status === 200 && typeof resp.data === "object") {
-          const text = JSON.stringify(resp.data);
+    const fetchHostMsgString = JSON.stringify(EidFetchHostMsg);
 
-          // TODO remove log
-          console.log("DID: QRCode Text:", text);
-
-          didChainAuthor.setAuthState(resp.data);
-
-          didChainAuthor.setLeftTime(MaxPeriod);
-          showQRMask(false);
-
-          window.didChainAuthor.createQrcode(text, 320);
-          const b = createQRTimer();
-          if (b) {
-            createCheckTimer();
-          }
+    rpc.eidHandProtocol(
+      fetchHostMsgString,
+      function (erpcResponse) {
+        if (!erpcResponse) {
+          console.warn(
+            "Check whether the top page integrates EID Chain JSON RPC protocol."
+          );
+        } else if (
+          erpcResponse.erpcMethod !== "fetchHostname" ||
+          !erpcResponse.data
+        ) {
+          // ignore other message
         } else {
-          console.warn("API: /api/auth response data fail", data);
+          const hostname = erpcResponse.data;
+          //?hostname=" + hostname
+          $http
+            .get("auth?hostname=" + hostname)
+            .then((resp) => {
+              console.log(">>>>>>>>axios>>>>>>>>>>>>", resp);
+              if (resp.status === 200 && typeof resp.data === "object") {
+                const text = JSON.stringify(resp.data);
+
+                // TODO remove log
+                console.log("DID: QRCode Text:", text);
+
+                didChainAuthor.setAuthState(resp.data);
+
+                didChainAuthor.setLeftTime(MaxPeriod);
+                showQRMask(false);
+
+                window.didChainAuthor.createQrcode(text, 320);
+                const b = createQRTimer();
+                if (b) {
+                  createCheckTimer();
+                }
+              } else {
+                console.warn("API: /api/auth response data fail", data);
+              }
+            })
+            .catch((err) => {
+              console.warn(">>>>>>>>Error>>>>>>>>>>>>", err);
+              alert(err.message);
+            });
         }
-      })
-      .catch((err) => {
-        console.warn(">>>>>>>>Error>>>>>>>>>>>>", err);
-        alert(err.message);
-      });
+      },
+      function (erpcError) {
+        console.error("Top Page fail.", erpcError.message);
+        alert("Top fetch host fail,", erpcError.message);
+      }
+    );
   }
 
   function createQRTimer() {
@@ -191,7 +234,7 @@
     }
     QRTimer = setInterval(function () {
       const curTimes = didChainAuthor.getLeftTime();
-      console.log("QRTimer >>>>>", curTimes);
+      // console.log("QRTimer >>>>>", curTimes);
       if (curTimes <= 0) {
         // clear
         clearInterval(QRTimer) &&
@@ -215,7 +258,7 @@
     CheckTimer = setInterval(function () {
       const curTimes = didChainAuthor.getLeftTime();
 
-      console.log("CheckTimer excuting :", curTimes);
+      // console.log("CheckTimer excuting :", curTimes);
 
       const paramState = didChainAuthor.getAuthState();
       if (curTimes <= 0) {
@@ -279,7 +322,7 @@
   }
 
   function showQRMask(hide) {
-    console.log("<<<.>>", hide);
+    // console.log("<<<.>>", hide);
     !hide
       ? $("#DidQrMask").addClass("mask-hide").removeClass("did-hover")
       : $("#DidQrMask").removeClass("mask-hide").addClass("did-hover");
