@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-04-10 01:04:30
+ * @LastEditTime: 2021-04-14 12:45:36
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \.sp-wikie:\EWork\didchain_work\leech-ifr\publish\js\site-main.js
+ */
 /**
  * EID Iframe 扫码验证成功后返回的消息数据,json 字符串
  * 系统可根据该消息在此函数内容做相应处理
@@ -11,6 +19,14 @@ var recivedMsgHandle = function (message) {
   } catch (error) {
     $("#recMsg").text(message);
   }
+};
+/**
+ * 设置 iframe 内 二维码大小
+ * @returns number
+ */
+var getSize = function () {
+  const size = 400;
+  return size;
 };
 
 /**
@@ -31,7 +47,7 @@ var rpc = new easyXDM.Rpc(
     props: {
       frameBorder: 0,
       scrolling: "no",
-      style: { width: "100%", height: "430px" },
+      style: { width: "190px", "min-height": "250px", border: "1px solid red" },
     },
   },
   {
@@ -60,6 +76,11 @@ var rpc = new easyXDM.Rpc(
               return {
                 erpcMethod: method,
                 data: data,
+              };
+            case "setQrcodeSize":
+              return {
+                erpcMethod: method,
+                data: getSize(),
               };
             default:
               throw new Error(

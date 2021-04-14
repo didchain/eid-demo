@@ -36,15 +36,15 @@
       display: flex;
       justify-content: center;
       justify-items: center;
-      flex: 0 0 50px;
-      padding: 20px 20px;
+      flex: 0 0 auto;
+      padding: 9px 6px;
     }
 
     .didqrcode-oper-wrap .did-refresh-btn {
       color: #0c123d;
       cursor: pointer;
       font-weight: 300;
-      font-size: 1.05rem;
+      font-size: 0.8rem;
       /* margin: 6px 10px; */
     }
 
@@ -52,8 +52,8 @@
       color: #0c123d;
       font-weight: 300;
       font-size: 12px;
-      padding: 12px 12px;
-      padding-bottom: 6px;
+      padding: 2px 2px;
+      padding-bottom: 4px;
       border: 0px;
       box-shadow: none;
     }
@@ -68,14 +68,15 @@
       display: flex;
       float: left;
       top: 0;
-      width: 100%;
-      height: calc(100% - 65px);
+      width: calc(100% - 12px);
+      height: calc(78% - 30px);
       color: #0c123d;
-      font-size: 1.25rem;
+      font-size: 1.05rem;
       font-weight: 500;
       justify-content: center;
       align-items: center;
       background: rgba(246, 246, 246, 0.9);
+      text-align: center;
     }
 
     .did-mask-wrap.mask-hide {
@@ -86,7 +87,7 @@
       width: 0;
       height: 0;
       color: #0c123d;
-      font-size: 1.25rem;
+      font-size: 1.05rem;
       font-weight: 500;
       justify-content: center;
       align-items: center;
@@ -97,14 +98,14 @@
       cursor: pointer;
       /* color: #feca32; */
       background: rgba(250, 250, 250, 0.95);
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
 
     .did-mask-wrap.did-hover:hover > div.mask-tips {
       border: 1px solid #feca32;
       background: rgba(254, 202, 50, 0.98);
       border-radius: 8px;
-      padding: 6px 20px;
+      padding: 6px 10px;
     }
   </style>
   <body class="__did_body">
@@ -123,7 +124,7 @@
       <button id="DidRefreshBtn" class="did-refresh-btn">刷新二维码</button>
       <!-- <button id="testBtn">test</button> -->
     </div>
-    <script src="./vendors/easyxdm/easyXDM.min.js"></script>
+    <script src="./vendors/easyeid/easyEID.min.js"></script>
     <script src="./js/qrcode-core.js"></script>
   </body>
 </html>

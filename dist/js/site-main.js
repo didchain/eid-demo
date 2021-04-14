@@ -15,7 +15,6 @@ var recivedMsgHandle = function (message) {
 
 /**
  * http://eid.baschain.cn/qrcode.html release demo
- * https://wechat.baschain.cn/qrcode.html test
  */
 var iframeUrl = "http://eid.baschain.cn/qrcode.html"; // "http://eid.baschain.cn/qrcode.html";
 

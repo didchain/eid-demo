@@ -1,6 +1,7 @@
 (function (options) {
   if (!$) throw new Error("no found jquery.");
   if (!QRCode) throw new Error("unfound QRCode lib.");
+  const qrsize = 190;
 
   const EidFetchHostMsg = {
     erpcMethod: "fetchHostname",
@@ -45,7 +46,7 @@
     version: 13,
     errorCorrectionLevel: "M",
     margin: 1,
-    width: 320,
+    width: qrsize,
     color: {
       dark: "#000000",
       light: "#FFFFFF",
@@ -65,7 +66,7 @@
   let QRTimer = null;
   let CheckTimer = null;
 
-  const MaxPeriod = 300;
+  const MaxPeriod = 10;
   const CheckPeriod = 2500;
   const Modal = function (opts = {}) {
     /** api/check data  */
@@ -112,7 +113,7 @@
 
   Modal.prototype.getQrOptions = function (size) {
     let _size = qrcodeOptions.width;
-    if (typeof size === "number" && size >= 200 && size <= 600) {
+    if (typeof size === "number" && size >= 80 && size <= 600) {
       _size = size;
     }
 
@@ -127,6 +128,7 @@
     const _canvas = createCanvas(this.qrCtx);
 
     const _opts = this.getQrOptions(size);
+    console.log(">>>>>>>>>>>>", _opts);
     QRCode.toCanvas(_canvas[0], text, _opts, function (err) {
       if (err) {
         console.log("create Qrcode fail", err);
@@ -171,6 +173,7 @@
   //   );
   // });
   /* ----------------------- function ------------------------------- */
+  function initQrcodeSize() {}
   function createQrcodeHandler(tag) {
     console.log("QRcode create tag:", tag);
     const fetchHostMsgString = JSON.stringify(EidFetchHostMsg);
@@ -205,7 +208,7 @@
                 didChainAuthor.setLeftTime(MaxPeriod);
                 showQRMask(false);
 
-                window.didChainAuthor.createQrcode(text, 320);
+                window.didChainAuthor.createQrcode(text, qrsize);
                 const b = createQRTimer();
                 if (b) {
                   createCheckTimer();
