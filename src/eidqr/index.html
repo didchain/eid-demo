@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>EID-QRCode</title>
+    <link rel="stylesheet" href="css/qrcode_main.css" />
+    <script src="./vendors/jquery.min.js"></script>
+    <script src="./vendors/axios.min.js"></script>
+    <script src="./vendors/qrcode.min.js"></script>
+    <style></style>
+  </head>
+
+  <body class="__did_body">
+    <div class="eidqr-container">
+      <div class="eid-inner">
+        <div class="eid-timer__box">
+          <div class="timer-text">
+            剩余 <span id="DidLeftTimes"></span> 秒失效
+          </div>
+        </div>
+        <div class="eid-qrcode__box">
+          <div id="__DidQrcodeContainer" class="qrcode-container"></div>
+        </div>
+        <!-- EID QRcode Mask start mask-hide  -->
+        <div id="DidQrMask" class="eid-mask__box mask-hide">
+          <div id="DidMaskTipBtn" class="mask-tips">
+            二维码已失效,点击可刷新
+          </div>
+        </div>
+        <!-- EID QRcode Mask start -->
+        <div class="eid-oper__box">
+          <button id="DidRefreshBtn" class="eid-btn">刷新二维码</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./vendors/easyeid/easyEID.min.js"></script>
+    <script src="js/test.js"></script>
+  </body>
+</html>

@@ -1,0 +1,153 @@
+body.__did_body * {
+  font-size: 14px;
+}
+
+button.eid-btn {
+  display: inline-block;
+  padding: 4px 12px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+
+  text-shadow: 0 1px 0 #fff;
+  background-image: -webkit-linear-gradient(top, #fff 0, #e0e0e0 100%);
+  background-image: -o-linear-gradient(top, #fff 0, #e0e0e0 100%);
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#fff),
+    to(#e0e0e0)
+  );
+  background-image: linear-gradient(to bottom, #fff 0, #e0e0e0 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  background-repeat: repeat-x;
+  border-color: #dbdbdb;
+  border-color: #ccc;
+}
+
+button.eid-btn.active,
+button.eid-btn:active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.125);
+}
+
+button.eid-btn:hover {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+
+.eidqr-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+  /* border: 1px solid greenyellow; */
+}
+
+/* .eidqr-container {
+  position: fixed;
+  height: 50px;
+  width: 50px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+} */
+
+.eidqr-container > div.eid-inner {
+  flex: 1 1 auto;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.eid-timer__box {
+  padding: 0;
+  margin: 0;
+}
+
+.eid-timer__box div.timer-text {
+  line-height: 20px;
+}
+
+.eid-oper__box {
+  line-height: 26px;
+}
+
+.eid-mask__box {
+  position: fixed;
+  display: flex;
+  float: left;
+  top: 4px;
+  width: calc(100% - 12px);
+  height: calc(100% - 6px);
+  justify-content: center;
+  align-items: center;
+  background: rgba(246, 246, 246, 0.9);
+  text-align: center;
+  /* padding-left: 20px;
+  padding-right: 20px; */
+}
+
+.eid-mask__box .mask-tips {
+  width: calc(100% - 40px);
+  text-align: center;
+  color: #0c123d;
+  font-size: 1.05rem;
+  font-weight: 500;
+  padding: 6px 10px;
+  word-break: break-all;
+}
+
+.eid-mask__box:hover {
+  cursor: pointer;
+  background: rgba(250, 250, 250, 0.9);
+}
+
+.eid-mask__box:hover > div.mask-tips {
+  border: 1px solid #feca32;
+  background: rgba(254, 202, 50, 0.98);
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+.eid-mask__box.mask-hide {
+  position: fixed;
+  display: none;
+  float: left;
+  z-index: -1;
+  background: transparent;
+}
+
+.eid-oper__box {
+  padding-bottom: 2px;
+}

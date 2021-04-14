@@ -1,10 +1,12 @@
 {
   "name": "leech-ifr",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Demo",
   "main": "index.js",
   "scripts": {
-    "dev": "lite-server -c ci/bs-config.js",
+    "dev": "run-p eid demo",
+    "eid": "lite-server -c ci/bs-eid-config.js",
+    "demo": "lite-server -c ci/bs-demo-config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -14,6 +16,7 @@
     "http-proxy-middleware": "^1.1.0",
     "jquery": "3.5.1",
     "lite-server": "^2.6.1",
+    "npm-run-all": "^4.1.5",
     "qrcode": "^1.4.4"
   }
 }
