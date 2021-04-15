@@ -16,8 +16,9 @@ const DEV_MODE = true; //控制打印日志
 const EJRPC_PROTOCOL_VERSION = "v1"; //
 
 const SIZE_PARAMS = {
-  QRCodeSize: 110, // 控制IFRAME 内二维码大小 只接受数字,且大于等于80
+  QRCodeSize: 180, // 控制IFRAME 内二维码大小 只接受数字,且大于等于80
   IFRAME_H: 280, // 控制top页面IFRAME 高度
+  IFRAME_W: 220,
 };
 
 const EXPIRED_PERIOD = 18; // 控制二维码过期时间 单位:秒
@@ -26,7 +27,7 @@ const EXPIRED_PERIOD = 18; // 控制二维码过期时间 单位:秒
  * http://eid.baschain.cn/qrcode.html release demo
  * https://wechat.baschain.cn/qrcode.html test
  */
-var iframeUrl = "https://eidjrpc.baschain.cn/index.html"; // "http://eid.baschain.cn/qrcode.html";
+var iframeUrl = "https://wechat.baschain.cn/qrcode.html"; // "http://eid.baschain.cn/qrcode.html";
 
 const siteHostname = "";
 
@@ -41,6 +42,7 @@ var rpc = new easyXDM.Rpc(
       frameBorder: 0,
       scrolling: "no",
       style: {
+        width: SIZE_PARAMS.IFRAME_W + "px",
         height: SIZE_PARAMS.IFRAME_H + "px",
       },
     },
@@ -95,24 +97,6 @@ var rpc = new easyXDM.Rpc(
     },
   }
 );
-
-function buildEidResponse(errMsg, data) {
-  const resp = {
-    status: 1,
-    message: "success",
-    data: null,
-  };
-
-  if (!errMsg && data) {
-    resp.data = data;
-  }
-  if (errMsg !== "") {
-    resp.status = 0;
-    resp.message = errMsg;
-  }
-
-  return JSON.stringify(resp);
-}
 
 function Log() {
   DEV_MODE && console.log(arguments);
