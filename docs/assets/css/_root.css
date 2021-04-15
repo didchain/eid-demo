@@ -1,0 +1,18 @@
+:root {
+    --theme-color: #2d8cf0;
+    --blog-bg-color: #fff;
+    --text-color: #596172;
+    --border-color: #eef2f8;
+    --catalog-bg-color: #fff;
+    --panel-bg-color: #f8f8f8;
+    --code-bg-color: #f1f1f1;
+}
+
+:root[mode=light] {
+    --blog-bg-color: #fff;
+    --text-color: #596172;
+    --border-color: #eef2f8;
+    --catalog-bg-color: #fff;
+    --panel-bg-color: #f8f8f8;
+    --code-bg-color: #f1f1f1;
+}

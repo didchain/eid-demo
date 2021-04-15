@@ -107,6 +107,7 @@ button.eid-btn:hover {
   position: fixed;
   display: flex;
   float: left;
+  left: 6px;
   top: 4px;
   width: calc(100% - 12px);
   height: calc(100% - 6px);
@@ -119,12 +120,11 @@ button.eid-btn:hover {
 }
 
 .eid-mask__box .mask-tips {
-  width: calc(100% - 40px);
   text-align: center;
   color: #0c123d;
   font-size: 1.05rem;
   font-weight: 500;
-  padding: 6px 10px;
+  padding: 6px 6px;
   word-break: break-all;
 }
 

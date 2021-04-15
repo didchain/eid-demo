@@ -1,108 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>登录</title>
-    <script src="./vendors/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Description" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    />
+
+    <link rel="stylesheet" href="./assets/css/_root.css" />
+
+    <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css"> -->
+    <link rel="stylesheet" href="//unpkg.com/docsify/themes/buble.css" />
+    <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/dolphin.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-defaults.css"> -->
+    <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/dark.css"> -->
+
+    <link href="./assets/css/main.css" rel="stylesheet" />
   </head>
-  <style lang="css">
-    .main-wrap {
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .main-wrap .inner-wrap {
-      min-width: 800px;
-      min-height: 450px;
-      display: flex;
-      flex-direction: row;
-      border-radius: 16px;
-      padding: 20px;
-      border: 1px solid #88c;
-    }
-    .qrcode-box {
-      max-width: 400px;
-      height: 400px;
-      flex: 1 1 auto;
-      align-self: flex-start;
-    }
-
-    .splitor-virtual {
-      width: 2px;
-      background-color: aqua;
-      margin: 24px;
-    }
-
-    .login-box {
-      width: 45%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-    }
-
-    .login-box .sys-title {
-      font-size: 1.75rem;
-      padding-bottom: 1rem;
-    }
-
-    .login-box div {
-      flex: 0 0 auto;
-    }
-
-    .login-box .login-actions {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      padding: 12px 0px;
-    }
-
-    .login-box .login-actions button:not(:first-child) {
-      margin-left: 12px;
-    }
-
-    .rec-msg {
-      word-break: break-all;
-      font-size: 1.15rem;
-    }
-  </style>
   <body>
-    <div id="demoApp" class="main-wrap">
-      <div class="inner-wrap">
-        <div id="qrcodeIfrBox" class="qrcode-box">
-          <!-- <iframe
-            src="qrcode.html"
-            frameborder="0"
-            width="400px"
-            height="420px"
-          ></iframe> -->
-        </div>
-        <div class="splitor-virtual"></div>
-        <div class="login-box">
-          <div class="sys-title">网站后台管理系统</div>
-          <form action="#" class="login-form">
-            <div class="f-label"><span>用户名:</span></div>
-            <div class="f-input"><input type="text" name="uname" /></div>
-            <div class="f-label"><span>密码:</span></div>
-            <div class="f-input"><input type="password" name="pwd" /></div>
-          </form>
-          <div class="login-actions">
-            <button>登录</button>
-            <button>重置</button>
-          </div>
+    <div id="app"></div>
+    <script>
+      // console.log(">>>>>>>>>>>>>>", process.env.NODE_ENV);
+      window.$docsify = {
+        name: "EID-QRCode Wiki",
+        basePath: "/wiki/",
+        repo: "",
+        loadSidebar: false,
+        loadNavbar: false,
+      };
+    </script>
+    <!-- Docsify v4 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
 
-          <div class="rec-msg" id="recMsg"></div>
-        </div>
-      </div>
-    </div>
-
-    <script src="./vendors/easyxdm/easyXDM.min.js"></script>
-    <script src="./js/site-main.js"></script>
+    <!-- highlight -->
+    <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-c.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-nasm.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-markdown.min.js"></script>
   </body>
 </html>

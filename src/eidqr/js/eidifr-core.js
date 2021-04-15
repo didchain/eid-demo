@@ -7,7 +7,7 @@
   /* --------------- Inner Scope Constant Defined Begin ----------------  */
 
   const DEV_MODE = true;
-  const DEF_MAX_EXPIRED_PERIOD = 10; // second
+  const DEF_MAX_EXPIRED_PERIOD = 90; // second
   const DEF_SIZE = {
     w: 200,
     h: 220,
@@ -70,7 +70,6 @@
     this.passedData = null;
     this.leftTimes = DEF_MAX_EXPIRED_PERIOD;
 
-    this.size = Object.assign({}, DEF_SIZE);
     this.qrw = DEF_SIZE.qrw;
 
     this.hostname = "";
@@ -166,6 +165,7 @@
           eidInst.setHostname(hostname);
           let qrWidth = erpcResponse.data.qrw || modal.qrw;
           eidInst.setQRCodeSize(qrWidth);
+          setMaskTipMaxWidth(qrWidth);
 
           if (erpcResponse.data.expiredPeriod > 0)
             eidInst.setConfigProps(
@@ -195,13 +195,15 @@
       throw new Error("hostname lost.");
     }
 
+    const suffixTs = "&ts=" + new Date().getTime();
     $http
-      .get("auth?hostname=" + hostname)
-      .then((resp) => {
+      .get("auth?hostname=" + hostname + suffixTs)
+      .then(function (resp) {
         if (resp.status === 200 && typeof resp.data === "object") {
           const text = JSON.stringify(resp.data);
           eidInst.setAuthState(resp.data);
           Log(">>>>>>>>axios>>>>>>>>>>>>", text);
+
           const container = getQRCodeContainer();
           const _canvas = createCanvas(container);
 
@@ -218,7 +220,7 @@
           });
         }
       })
-      .catch((err) => {
+      .catch(function (err) {
         console.warn("Call EID Chain API [/auth] fail.", err.message);
       });
   }
@@ -257,8 +259,8 @@
 
     showQRMask(false);
     QRTimer = setInterval(function () {
-      const curTimes = eidInst.getLeftTime();
-      if (curTimes <= 0) {
+      var _curTimes = eidInst.getLeftTime();
+      if (_curTimes <= 0) {
         // clear
         clearInterval(QRTimer) && (QRTimer = null);
         eidInst.setLeftTime(0);
@@ -266,7 +268,7 @@
 
         showQRMask(true);
       } else {
-        eidInst.setLeftTime(curTimes - 1);
+        eidInst.setLeftTime(_curTimes - 1);
       }
     }, 1000);
 
@@ -282,24 +284,24 @@
       const curTimes = eidInst.getLeftTime();
 
       const paramState = eidInst.getAuthState();
-      console.log(">>>>>>>>>>>>paramState>>>>>>", paramState);
+
       if (curTimes <= 0) {
         Log("Qrcode expired clear Checker.");
         clearInterval(CheckTimer) && (CheckTimer = null);
       } else if (!!paramState) {
+        // IE clear cache
+        const _suffixTs = "&ts=" + new Date().getTime();
         $http
           .post("/check", paramState)
-          .then((resp) => {
-            console.log(">>>>>>>>>>>>>>>>>>", resp);
+          .then(function (resp) {
+            Log(">>>>>>>>>>>>>>>>>>", resp);
             if (resp.status === 200 && typeof resp.data === "object") {
               const resultCode = resp.data.result_code;
-
               Log("Check resp:", resultCode, resp);
               if (resultCode === 0) {
                 //  notify system
                 destoryTimers();
-
-                console.log(">>>>>>>>>>>>>>>>>>", resp.data);
+                Log(">>>>>>>>>>>>>>>>>>", resp.data);
                 rpc.echo(JSON.stringify(resp.data));
                 // demoRedirect();
               } else {
@@ -308,13 +310,13 @@
               console.warn("Check resp illegal.");
             }
           })
-          .catch((err) => {
+          .catch(function (err) {
             console.log("Checker- api/check fail.", err.message);
           });
       }
     }, CHECKED_PERIOD);
 
-    console.log("CheckTimer Created", CheckTimer);
+    Log("CheckTimer Created", CheckTimer);
 
     return CheckTimer;
   }
@@ -338,19 +340,23 @@
     if (!axios) {
       throw new Error("unfound axios lib.");
     } else {
-      const BASE_API_URL = "/api/"; // don't modified this match the nginx config
-      // axios.interceptors.request.use((config) => {
-      //   config.withCredentials = true;
-      //   return config;
-      // });
+      var BASE_API_URL = "/api/"; // don't modified this match the nginx config
+      axios.interceptors.request.use(function (config) {
+        config.withCredentials = true;
+        if (config.method === "get") {
+          config.params = config.params || {};
+          config.params.ts = new Date().getTime();
+        }
+        return config;
+      });
 
-      const $http = axios.create({
+      var $http = axios.create({
         baseURL: BASE_API_URL,
         timeout: 60000,
         headers: { "Access-Control-Allow-Origin": "*" },
       });
 
-      $http.interceptors.request.use((config) => {
+      $http.interceptors.request.use(function (config) {
         config.withCredentials = true;
         return config;
       });
@@ -362,14 +368,27 @@
     $("#DidLeftTimes").text(text);
   }
 
+  function setMaskTipMaxWidth(width) {
+    let w = width - 10;
+    $("#DidMaskTipBtn").css("max-width", w + "px");
+    if (width <= 120) {
+      $("#DidMaskTipBtn").css("font-size", "0.65rem");
+    }
+  }
+
   function showQRMask(hide) {
-    // console.log("<<<.>>", hide);
     !hide
       ? $("#DidQrMask").addClass("mask-hide")
       : $("#DidQrMask").removeClass("mask-hide");
   }
 
-  function Log(...args) {
-    DEV_MODE && console.log(...args);
+  function comboAPIUrl(api) {
+    return "/api/" + api;
   }
+
+  function Log() {
+    DEV_MODE && console.log(arguments);
+  }
+
+  /** AJAX */
 })(jQuery, QRCode);

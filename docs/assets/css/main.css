@@ -1,0 +1,28 @@
+
+
+.markdown-section blockquote{
+    border: none;
+    margin: 15px 0;
+    color: inherit;
+    border-radius: 4px;
+    padding: 1px 15px;
+    border-left: 4px solid var(--theme-color);
+    background-color: var(--panel-bg-color);
+}
+
+.markdown-section pre > code {
+    background-color: #f8f8f8;
+    border-radius: 4px;
+    display: block;
+    font-family: Inconsolata;
+    line-height: 1.1rem;
+    max-width: inherit;
+    overflow: inherit;
+    padding: 16px 0.8em 16px;
+    padding-top: 20px;
+    padding-right: 0.8em;
+    padding-bottom: 20px;
+    padding-left: 0.8em;
+    position: relative;
+    white-space: inherit;
+}
