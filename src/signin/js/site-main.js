@@ -6,30 +6,30 @@
 var recivedMsgHandle = function (message) {
   $(".rec-msg-wrap").removeClass("rec-hide");
   try {
-    const json = JSON.parse(message);
+    var json = JSON.parse(message);
     $("#recMsg").text(JSON.stringify(json, null, 2));
   } catch (error) {
     $("#recMsg").text(message);
   }
 };
-const DEV_MODE = true; //控制打印日志
-const EJRPC_PROTOCOL_VERSION = "v1"; //
+var DEV_MODE = true; //控制打印日志
+var EJRPC_PROTOCOL_VERSION = "v1"; //
 
-const SIZE_PARAMS = {
+var SIZE_PARAMS = {
   QRCodeSize: 180, // 控制IFRAME 内二维码大小 只接受数字,且大于等于80
   IFRAME_H: 280, // 控制top页面IFRAME 高度
   IFRAME_W: 220,
 };
 
-const EXPIRED_PERIOD = 18; // 控制二维码过期时间 单位:秒
+var EXPIRED_PERIOD = 300; // 控制二维码过期时间 单位:秒
 
 /**
  * http://eid.baschain.cn/qrcode.html release demo
- * https://wechat.baschain.cn/qrcode.html test
+ * https://wechat.baschain.cn/qrcode.html release
  */
-var iframeUrl = "https://wechat.baschain.cn/qrcode.html"; // "http://eid.baschain.cn/qrcode.html";
+var iframeUrl = "http://192.168.1.110:28964/qrcode.html"; // "http://eid.baschain.cn/qrcode.html";
 
-const siteHostname = "";
+var siteHostname = "";
 
 var rpc = new easyXDM.Rpc(
   {
@@ -55,7 +55,7 @@ var rpc = new easyXDM.Rpc(
       },
       eidHandProtocol: function (message) {
         Log("EidHandProtocol>", message);
-        let erpcMethod = "";
+        var erpcMethod = "";
         if (typeof message === "string") {
           erpcMethod = message;
         } else if (
@@ -70,7 +70,7 @@ var rpc = new easyXDM.Rpc(
             "Check sub iframe is support EID Chain Json RPC Protocol"
           );
         }
-        let response = {
+        var response = {
           erpcMethod: erpcMethod,
           ver: EJRPC_PROTOCOL_VERSION,
           data: null,

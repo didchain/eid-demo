@@ -184,7 +184,7 @@
   if (navMatches) {
     setTimeout(function () {
       fetchSizeMessage();
-    }, 800);
+    }, 200);
   } else {
     fetchSizeMessage();
   }
