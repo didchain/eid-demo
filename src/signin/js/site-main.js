@@ -27,7 +27,7 @@ var EXPIRED_PERIOD = 300; // 控制二维码过期时间 单位:秒
  * http://eid.baschain.cn/qrcode.html release demo
  * https://wechat.baschain.cn/qrcode.html release
  */
-var iframeUrl = "http://192.168.1.110:28964/qrcode.html"; // "http://eid.baschain.cn/qrcode.html";
+var iframeUrl = "http://127.0.0.1:28964/qrcode.html"; // "http://eid.baschain.cn/qrcode.html";
 
 var siteHostname = "";
 
